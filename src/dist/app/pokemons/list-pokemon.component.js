@@ -17,10 +17,13 @@ var ListPokemonComponent = (function () {
     function ListPokemonComponent(router, pokemonsService) {
         this.router = router;
         this.pokemonsService = pokemonsService;
-        this.title = "Liste de pokémons";
+        this.pokemons = null;
     }
     ;
     ListPokemonComponent.prototype.ngOnInit = function () {
+        this.getPokemons();
+    };
+    ListPokemonComponent.prototype.getPokemons = function () {
         this.pokemons = this.pokemonsService.getPokemons();
     };
     ListPokemonComponent.prototype.selectPokemon = function (pokemon) {

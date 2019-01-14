@@ -8,18 +8,21 @@ import { PokemonsService } from './pokemons.service';
   selector: 'list-pokemon',
   templateUrl: './app/pokemons/list-pokemon.component.html'
 })
-export class ListPokemonComponent {
+export class ListPokemonComponent implements OnInit {
 
-  private pokemons: Pokemon[];
-  private title: string = "Liste de pokémons";
+  pokemons: Pokemon[] = null;
 
 // Injection de dépendance grace au param private pokemonsService
   constructor(private router: Router, private pokemonsService: PokemonsService) { };
 
-  ngOnInit() {
-    this.pokemons = this.pokemonsService.getPokemons();
+  ngOnInit(): void {
+    this.getPokemons();
   }
 
+  getPokemons(): void {
+    this.pokemons = this.pokemonsService.getPokemons();
+  }
+  
   selectPokemon(pokemon: Pokemon) {
     // alert("vous avez cliqué sur " + pokemon.name);
     let link = ['/pokemon', pokemon.id];
