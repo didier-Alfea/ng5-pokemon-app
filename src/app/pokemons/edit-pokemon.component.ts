@@ -4,8 +4,8 @@ import { Pokemon } from './pokemon';
 import { PokemonsService } from './pokemons.service';
 
 @Component({
-  selector: 'edit-pokemon',
-  template: `
+	selector: 'edit-pokemon',
+	template: `
     <h2 class="header center">Editer {{ pokemon?.name }}</h2>
 		<p class="center">
 			<img *ngIf="pokemon" [src]="pokemon.picture"/>
@@ -15,15 +15,16 @@ import { PokemonsService } from './pokemons.service';
 })
 export class EditPokemonComponent implements OnInit {
 
-  pokemon: Pokemon = null;
+	pokemon: Pokemon = null;
 
-  constructor(
-    private route: ActivatedRoute,
-    private pokemonsService: PokemonsService) {}
+	constructor(
+		private route: ActivatedRoute,
+		private pokemonsService: PokemonsService) { }
 
-  ngOnInit(): void {
-    let id = +this.route.snapshot.params['id'];
-    this.pokemon = this.pokemonsService.getPokemon(id);
-  }
+	ngOnInit(): void {
+		let id = +this.route.snapshot.params['id'];
+		this.pokemonsService.getPokemon(id)
+			.subscribe(pokemon => this.pokemon = pokemon);
+	}
 
 }

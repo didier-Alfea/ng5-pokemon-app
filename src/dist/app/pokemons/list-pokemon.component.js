@@ -13,25 +13,24 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var pokemons_service_1 = require("./pokemons.service");
 var ListPokemonComponent = (function () {
-    // Injection de dépendance grace au param private pokemonsService
     function ListPokemonComponent(router, pokemonsService) {
         this.router = router;
         this.pokemonsService = pokemonsService;
         this.pokemons = null;
     }
-    ;
     ListPokemonComponent.prototype.ngOnInit = function () {
         this.getPokemons();
     };
     ListPokemonComponent.prototype.getPokemons = function () {
-        this.pokemons = this.pokemonsService.getPokemons();
+        var _this = this;
+        this.pokemonsService.getPokemons()
+            .subscribe(function (pokemons) { return _this.pokemons = pokemons; });
     };
     ListPokemonComponent.prototype.selectPokemon = function (pokemon) {
-        // alert("vous avez cliqué sur " + pokemon.name);
+        console.log('Vous avez selectionné ' + pokemon.name);
         var link = ['/pokemon', pokemon.id];
         this.router.navigate(link);
     };
-    ;
     ListPokemonComponent = __decorate([
         core_1.Component({
             selector: 'list-pokemon',

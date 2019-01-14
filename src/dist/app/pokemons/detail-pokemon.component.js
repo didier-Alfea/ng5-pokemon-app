@@ -20,10 +20,12 @@ var DetailPokemonComponent = (function () {
         this.pokemon = null;
     }
     DetailPokemonComponent.prototype.ngOnInit = function () {
+        var _this = this;
         // recuperer l'id passé en param
         var id = +this.route.snapshot.paramMap.get('id');
-        // le service nous retourne maintenant le pokemon cherché
-        this.pokemon = this.pokemonsService.getPokemon(id);
+        // maintenant on recupere un observable auquel on peut souscrire
+        this.pokemonsService.getPokemon(id)
+            .subscribe(function (pokemon) { return _this.pokemon = pokemon; });
     };
     DetailPokemonComponent.prototype.goBack = function () {
         this.router.navigate(['/pokemons']);

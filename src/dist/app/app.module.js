@@ -8,24 +8,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
+var http_1 = require("@angular/common/http");
 var app_routing_module_1 = require("./app-routing.module");
 var pokemons_module_1 = require("./pokemons/pokemons.module");
-// Import du module http
-var http_1 = require("@angular/common/http");
-//
-var angular_in_memory_web_api_1 = require("angular-in-memory-web-api");
-var in_memory_data_service_1 = require("./in-memory-data.service");
 var app_component_1 = require("./app.component");
 var page_not_found_component_1 = require("./page-not-found.component");
+var angular_in_memory_web_api_1 = require("angular-in-memory-web-api");
+var in_memory_data_service_1 = require("./in-memory-data.service");
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [
-                // Ordre est important
                 platform_browser_1.BrowserModule,
                 http_1.HttpClientModule,
+                // Le module HttpClientInMemoryWebApiModule intercepte les requêtes HTTP
+                // et retourne des réponses simulées du serveur.
+                // Retirer l'importation quand un "vrai" serveur est prêt pour recevoir des requêtes.
                 angular_in_memory_web_api_1.HttpClientInMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService, { dataEncapsulation: false }),
                 pokemons_module_1.PokemonsModule,
                 app_routing_module_1.AppRoutingModule
