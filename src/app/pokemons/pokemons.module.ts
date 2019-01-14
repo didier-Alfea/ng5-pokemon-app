@@ -15,6 +15,8 @@ import { PokemonFormComponent } from './pokemon-form.component';
 import { PokemonSearchComponent } from './search-pokemon.component';
 import { LoaderComponent } from '../loader.component';
 
+import { AuthGuard } from '../auth-guard.service';
+
 @NgModule({
   imports: [
     // pour tous les sous modules => common module (autre que le module racine)
@@ -32,7 +34,7 @@ import { LoaderComponent } from '../loader.component';
     PokemonSearchComponent,
     LoaderComponent
   ],
-  providers: [PokemonsService]
+  providers: [PokemonsService, AuthGuard]
 })
 
 export class PokemonsModule { }
