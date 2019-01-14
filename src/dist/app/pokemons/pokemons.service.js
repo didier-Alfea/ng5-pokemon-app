@@ -36,12 +36,9 @@ var PokemonsService = (function () {
     };
     // retourne le pokemon avec l'identifiant passé en parametre
     PokemonsService.prototype.getPokemon = function (id) {
-        var pokemons = this.getPokemons();
-        for (var index = 0; index < pokemons.length; index++) {
-            if (id === pokemons[index].id) {
-                return pokemons[index];
-            }
-        }
+        var _this = this;
+        var url = this.pokemonsUrl + "/" + id; // syntaxe ES6
+        return this.http.get(url).pipe(operators_1.tap(function (_) { return _this.log("fetched pokemon id=" + id); }), operators_1.catchError(this.handleError("getPokemon id=\u00A4{id}")));
     };
     PokemonsService.prototype.getPokemonTypes = function () {
         return ['Plante', 'Feu', 'Eau', 'Insecte', 'Normal', 'Electrik', 'Poison', 'Fée', 'Vol'];

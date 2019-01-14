@@ -35,14 +35,13 @@ export class PokemonsService {
   }
 
   // retourne le pokemon avec l'identifiant passé en parametre
-  getPokemon(id: number): Pokemon {
-    let pokemons = this.getPokemons();
+  getPokemon(id: number): Observable<Pokemon> {
+    const url = `${this.pokemonsUrl}/${id}`; // syntaxe ES6
 
-    for(let index = 0; index < pokemons.length; index++) {
-      if(id === pokemons[index].id) {
-        return pokemons[index];
-      }
-    }
+    return this.http.get<Pokemon>(url).pipe(
+      tap(_ => this.log(`fetched pokemon id=${id}`)),
+      catchError(this.handleError<Pokemon>(`getPokemon id=¤{id}`))
+    );
   }
 
   getPokemonTypes(): string[] {
