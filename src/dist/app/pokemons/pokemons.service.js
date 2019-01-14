@@ -34,6 +34,21 @@ var PokemonsService = (function () {
         var _this = this;
         return this.http.get(this.pokemonsUrl).pipe(operators_1.tap(function (_) { return _this.log("fetched pokemons"); }), operators_1.catchError(this.handleError("getPokemons", [])));
     };
+    PokemonsService.prototype.updatePokemon = function (pokemon) {
+        var _this = this;
+        var httpOptions = {
+            headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' })
+        };
+        return this.http.put(this.pokemonsUrl, pokemon, httpOptions).pipe(operators_1.tap(function (_) { return _this.log("updated pokemon id=" + pokemon.id); }), operators_1.catchError(this.handleError('updatedPokemon')));
+    };
+    PokemonsService.prototype.deletePokemon = function (pokemon) {
+        var _this = this;
+        var url = this.pokemonsUrl + "/" + pokemon.id; // syntaxe ES6
+        var httpOptions = {
+            headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' })
+        };
+        return this.http.delete(url, httpOptions).pipe(operators_1.tap(function (_) { return _this.log("deleted pokemon.id"); }), operators_1.catchError(this.handleError("delete Pokemon")));
+    };
     // retourne le pokemon avec l'identifiant passé en parametre
     PokemonsService.prototype.getPokemon = function (id) {
         var _this = this;
@@ -42,6 +57,13 @@ var PokemonsService = (function () {
     };
     PokemonsService.prototype.getPokemonTypes = function () {
         return ['Plante', 'Feu', 'Eau', 'Insecte', 'Normal', 'Electrik', 'Poison', 'Fée', 'Vol'];
+    };
+    PokemonsService.prototype.searchPokemons = function (term) {
+        var _this = this;
+        if (!term.trim()) {
+            return of_1.of([]);
+        }
+        return this.http.get(this.pokemonsUrl + "/?name=" + term).pipe(operators_1.tap(function (_) { return _this.log("found pokemons matching \"" + term + "\""); }), operators_1.catchError(this.handleError('searchPokemons', [])));
     };
     PokemonsService = __decorate([
         core_1.Injectable(),

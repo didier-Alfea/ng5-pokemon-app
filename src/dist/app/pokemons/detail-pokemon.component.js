@@ -27,6 +27,11 @@ var DetailPokemonComponent = (function () {
         this.pokemonsService.getPokemon(id)
             .subscribe(function (pokemon) { return _this.pokemon = pokemon; });
     };
+    DetailPokemonComponent.prototype.delete = function (pokemon) {
+        var _this = this;
+        this.pokemonsService.deletePokemon(pokemon)
+            .subscribe(function (_) { return _this.goBack(); });
+    };
     DetailPokemonComponent.prototype.goBack = function () {
         this.router.navigate(['/pokemons']);
     };

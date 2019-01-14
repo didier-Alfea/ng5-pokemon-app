@@ -34,6 +34,28 @@ export class PokemonsService {
     );
   }
 
+  updatePokemon(pokemon: Pokemon): Observable<Pokemon> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+
+    return this.http.put(this.pokemonsUrl, pokemon, httpOptions).pipe(
+      tap(_ => this.log(`updated pokemon id=${pokemon.id}`)),
+      catchError(this.handleError<any>('updatedPokemon'))
+    );
+  }
+
+  deletePokemon(pokemon: Pokemon): Observable<Pokemon> {
+    const url = `${this.pokemonsUrl}/${pokemon.id}`; // syntaxe ES6
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+    };
+    return this.http.delete<Pokemon>(url, httpOptions).pipe(
+      tap(_ => this.log(`deleted pokemon.id`)),
+      catchError(this.handleError<Pokemon>(`delete Pokemon`))
+    );
+  }
+
   // retourne le pokemon avec l'identifiant passé en parametre
   getPokemon(id: number): Observable<Pokemon> {
     const url = `${this.pokemonsUrl}/${id}`; // syntaxe ES6
@@ -46,5 +68,16 @@ export class PokemonsService {
 
   getPokemonTypes(): string[] {
     return ['Plante','Feu','Eau','Insecte','Normal','Electrik','Poison','Fée','Vol'];
+  }
+
+  searchPokemons(term: string): Observable<Pokemon[]> {
+    if(!term.trim()) {
+      return of([]);
+    }
+
+    return this.http.get<Pokemon[]>(`${this.pokemonsUrl}/?name=${term}`).pipe(
+      tap(_ => this.log(`found pokemons matching "${term}"`)),
+      catchError(this.handleError<Pokemon[]>('searchPokemons', []))
+    );
   }
 }

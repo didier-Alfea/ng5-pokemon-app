@@ -12,6 +12,8 @@ import { PokemonsService }  from './pokemons.service';
 import { FormsModule } from '@angular/forms';
 import { EditPokemonComponent } from './edit-pokemon.component';
 import { PokemonFormComponent } from './pokemon-form.component';
+import { PokemonSearchComponent } from './search-pokemon.component';
+import { LoaderComponent } from '../loader.component';
 
 @NgModule({
   imports: [
@@ -26,7 +28,9 @@ import { PokemonFormComponent } from './pokemon-form.component';
     EditPokemonComponent,
     PokemonFormComponent,
     BorderCardDirective,
-    PokemonTypeColorPipe
+    PokemonTypeColorPipe,
+    PokemonSearchComponent,
+    LoaderComponent
   ],
   providers: [PokemonsService]
 })
