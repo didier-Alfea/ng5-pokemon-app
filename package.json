@@ -37,7 +37,9 @@
     "core-js": "^2.4.1",
     "rxjs": "^5.5.2",
     "systemjs": "0.19.40",
-    "zone.js": "^0.8.14"
+    "zone.js": "^0.8.14",
+    "adm-zip": ">=0.4.11",
+    "https-proxy-agent": ">=2.2.0"
   },
   "devDependencies": {
     "concurrently": "^3.2.0",
