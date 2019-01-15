@@ -40,6 +40,9 @@ var AppModule = (function () {
                 page_not_found_component_1.PageNotFoundComponent,
                 login_component_1.LoginComponent
             ],
+            providers: [
+                platform_browser_1.Title
+            ],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
