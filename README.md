@@ -1,7 +1,7 @@
 # ng5-pokemon-app
 # ng5-pokemon-app
 
-
+https://ng5-udemy-pokemon-app-3817c.firebaseapp.com/pokemon/all
 # Security issues:
 
 ## Upgrade adm-zip to version 0.4.11 or later
